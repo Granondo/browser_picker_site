@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/home.css';
+---
+
+<Layout title="Browser Picker - Choose Your Browser">
+  <main>
+    <div class="hero">
+      <div class="hero-content">
+        <div class="logo-container">
+          <div class="logo">B</div>
+          <div class="logo-bg"></div>
+        </div>
+        <h1>Browser Picker</h1>
+        <p class="tagline">Choose Your Browser, Every Time</p>
+        <p class="description">A lightweight Windows utility that lets you decide which browser opens your links. Take control of your browsing experience.</p>
+        
+        <div class="cta-buttons">
+          <a href="https://github.com/yourusername/browser-picker/releases/latest" class="button primary">
+            <span class="button-content">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Download Latest Release
+            </span>
+          </a>
+          <a href="https://github.com/yourusername/browser-picker" class="button secondary">
+            <span class="button-content">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              View on GitHub
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="browser-icons">
+        <div class="browser-icon">🌐</div>
+        <div class="browser-icon">🦊</div>
+        <div class="browser-icon">🧭</div>
+        <div class="browser-icon">🌍</div>
+      </div>
+    </div>
+
+    <section class="features">
+      <h2>Why Browser Picker?</h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <div class="feature-icon">🎯</div>
+          <h3>Smart Selection</h3>
+          <p>Choose your preferred browser for each link with a sleek popup interface</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>Lightning Fast</h3>
+          <p>Lightweight and efficient - starts instantly when you need it</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🪄</div>
+          <h3>Easy Setup</h3>
+          <p>Simple installation process with no complex configuration needed</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔒</div>
+          <h3>Privacy First</h3>
+          <p>No data collection, works completely offline for your privacy</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Click a Link</h3>
+          <p>Click any link in any application</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Choose Browser</h3>
+          <p>Select your preferred browser from the popup</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Browse Away</h3>
+          <p>The link opens in your chosen browser</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Browser Picker is an open-source project made with ❤️ for the community</p>
+    <div class="footer-links">
+      <a href="https://github.com/yourusername/browser-picker/issues">Report Issue</a>
+      <span>•</span>
+      <a href="https://github.com/yourusername/browser-picker/blob/main/LICENSE">License</a>
+    </div>
+  </footer>
+</Layout>
