@@ -2,5 +2,5 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'granondo.github.io',
+  site: 'https://granondo.github.io',
 })
