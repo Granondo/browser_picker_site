@@ -26,7 +26,7 @@ jobs:
 
       - run: ls -la dist/ # Проверить содержимое директории сборки
 
-      - uses: actions/upload-artifact@v4 # Загрузка артефактов сборки
+      - uses: actions/upload-artifact@v3 # Загрузка артефактов сборки
         with:
           name: github-pages
           path: dist/
@@ -40,7 +40,7 @@ jobs:
     environment:
       name: github-pages
     steps:
-      - uses: actions/download-artifact@v4 # Загрузка артефактов для деплоя
+      - uses: actions/download-artifact@v3 # Загрузка артефактов для деплоя
         with:
           name: github-pages
 
