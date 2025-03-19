@@ -15,14 +15,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 22.13
-      
+          node-version: '22.13'
+
       - run: npm ci
-      - run: npm run build
-      
-      - uses: actions/upload-artifact@v4
+
+      - run: npm run build # Сборка сайта
+
+      - run: ls -la dist/ # Проверить содержимое директории сборки
+
+      - uses: actions/upload-artifact@v4 # Загрузка артефактов сборки
         with:
           name: github-pages
           path: dist/
@@ -30,10 +34,14 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4 # Загрузка артефактов для деплоя
         with:
           name: github-pages
-          path: dist/
-      
-      - uses: actions/deploy-pages@v4
+
+      - uses: actions/deploy-pages@v4 # Деплой на GitHub Pages
