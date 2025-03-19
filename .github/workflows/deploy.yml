@@ -1,37 +1,39 @@
-name: Deploy to GitHub Pages
+name: Deploy Astro to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write  # критически важно
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
-        uses: actions/checkout@v3
-
-      - name: Use Node.js 22
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
-
-      - name: Install, build, and upload your site
-        uses: withastro/action@v0
+          node-version: 22.13
+      
+      - run: npm ci
+      - run: npm run build
+      
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astro-site
+          path: dist/
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+      - uses: actions/download-artifact@v4
+        with:
+          name: astro-site
+          path: dist/
+      
+      - uses: actions/deploy-pages@v4
