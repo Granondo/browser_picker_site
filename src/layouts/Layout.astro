@@ -1,6 +1,6 @@
 ---
+// Import styles directly - Astro will handle the bundling
 import '../styles/global.css';
-import '../styles/test.css';
 import ThemeSwitcher from '../components/ThemeSwitcher.astro';
 
 interface Props {
@@ -19,8 +19,7 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
     <meta name="generator" content={Astro.generator} />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <!-- Add this line to verify CSS loading -->
-    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}/styles/global.css`} />
+    <!-- Remove the explicit CSS link since we're importing it above -->
     <title>{title}</title>
   </head>
   <body>
@@ -28,5 +27,6 @@ const { title } = Astro.props;
     <slot />
   </body>
 </html>
+
 
 
