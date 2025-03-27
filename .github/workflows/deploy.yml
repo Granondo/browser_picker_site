@@ -28,7 +28,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v3 # Загрузка артефактов сборки
         with:
-          name: github-pages
+          name: github-pages-${{ github.sha }} # Уникальное имя артефакта
           path: dist/
 
   deploy:
@@ -42,6 +42,6 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4 # Загрузка артефактов для деплоя
         with:
-          name: github-pages
+          name: github-pages-${{ github.sha }} # Загрузка артефакта с уникальным именем
 
       - uses: actions/deploy-pages@v4 # Деплой на GitHub Pages
