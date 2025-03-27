@@ -3,7 +3,7 @@ main {
 }
 
 .hero {
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  background: linear-gradient(135deg, var(--hero-gradient-start), var(--hero-gradient-end));
   padding: 6rem 2rem;
   text-align: center;
   position: relative;
@@ -28,7 +28,7 @@ main {
 .logo {
   width: 100px;
   height: 100px;
-  background: white;
+  background: var(--card-bg);
   border-radius: 50%;
   color: var(--primary-color);
   font-family: 'FantasqueSansM Nerd Font', 'Inter', sans-serif;
@@ -123,14 +123,14 @@ h1 {
 }
 
 .primary {
-  background: white;
+  background: var(--card-bg);
   color: var(--primary-color);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px var(--shadow-color);
 }
 
 .primary:hover {
-  background: #f8f9ff;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+  background: var(--card-bg);
+  box-shadow: 0 6px 30px var(--shadow-color-hover);
 }
 
 .secondary {
@@ -152,7 +152,7 @@ h1 {
 .features h2 {
   text-align: center;
   font-size: 2.5rem;
-  color: #2c3e50;
+  color: var(--text-color);
   margin-bottom: 3rem;
   font-weight: 800;
 }
@@ -164,10 +164,10 @@ h1 {
 }
 
 .feature {
-  background: white;
+  background: var(--card-bg);
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px var(--shadow-color);
   transition: transform 0.3s ease;
 }
 
@@ -181,26 +181,26 @@ h1 {
 }
 
 .feature h3 {
-  color: #2c3e50;
+  color: var(--text-color);
   margin: 0 0 0.5rem;
   font-size: 1.25rem;
 }
 
 .feature p {
   margin: 0;
-  color: #666;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
 .how-it-works {
-  background: #f8f9ff;
+  background: var(--section-bg);
   padding: 6rem 2rem;
   text-align: center;
 }
 
 .how-it-works h2 {
   font-size: 2.5rem;
-  color: #2c3e50;
+  color: var(--text-color);
   margin-bottom: 3rem;
   font-weight: 800;
 }
@@ -234,20 +234,20 @@ h1 {
 }
 
 .step h3 {
-  color: #2c3e50;
+  color: var(--text-color);
   margin: 0 0 0.5rem;
 }
 
 .step p {
-  color: #666;
+  color: var(--text-secondary);
   margin: 0;
 }
 
 footer {
   text-align: center;
   padding: 3rem 2rem;
-  background: white;
-  color: #666;
+  background: var(--card-bg);
+  color: var(--text-secondary);
 }
 
 .footer-links {

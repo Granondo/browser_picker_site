@@ -3,12 +3,35 @@
   --primary-dark: #5273b8;
   --gradient-start: #6a8edb;
   --gradient-end: #8ba7e3;
+  --bg-color: #fafbff;
+  --text-color: #1a1a1a;
+  --text-secondary: #666;
+  --card-bg: white;
+  --section-bg: #f8f9ff;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --shadow-color-hover: rgba(0, 0, 0, 0.15);
+  --hero-gradient-start: var(--gradient-start);
+  --hero-gradient-end: var(--gradient-end);
+}
+
+html[data-theme="dark"] {
+  --primary-color: #8ba7e3;
+  --primary-dark: #4f46e5;
+  --bg-color: #111827;
+  --text-color: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --card-bg: #1f2937;
+  --section-bg: #151e2d;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --shadow-color-hover: rgba(0, 0, 0, 0.3);
+  --hero-gradient-start: #2a3b5c;
+  --hero-gradient-end: #3d4e7a;
 }
 
 html {
   font-family: 'Inter', system-ui, sans-serif;
-  background: #fafbff;
-  color: #1a1a1a;
+  background: var(--bg-color);
+  color: var(--text-color);
   scroll-behavior: smooth;
 }
 
