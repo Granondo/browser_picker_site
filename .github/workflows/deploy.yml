@@ -1,0 +1,47 @@
+name: Deploy Astro to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  actions: write  # критически важно
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.13'
+
+      - run: npm ci
+
+      - run: npm run build # Сборка сайта
+
+      - run: ls -la dist/ # Проверить содержимое директории сборки
+
+      - uses: actions/upload-pages-artifact@v3 # Загрузка артефактов сборки
+        with:
+          name: github-pages
+          path: dist/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+    steps:
+      - uses: actions/download-artifact@v4 # Загрузка артефактов для деплоя
+        with:
+          name: github-pages
+
+      - uses: actions/deploy-pages@v4 # Деплой на GitHub Pages
