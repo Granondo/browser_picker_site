@@ -8,7 +8,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  actions: write  # критически важно
+  actions: write
 
 jobs:
   build:
@@ -20,13 +20,20 @@ jobs:
         with:
           node-version: '22.13'
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npm run build # Сборка сайта
+      - name: Build site
+        run: npm run build
 
-      - run: ls -la dist/ # Проверить содержимое директории сборки
+      - name: Check build output
+        run: |
+          echo "Checking build output..."
+          ls -la dist/
+          echo "Checking for CSS files..."
+          find dist/ -name "*.css"
 
-      - uses: actions/upload-pages-artifact@v3 # Загрузка артефактов сборки
+      - uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
           path: dist/
@@ -40,8 +47,9 @@ jobs:
     environment:
       name: github-pages
     steps:
-      - uses: actions/download-artifact@v4 # Загрузка артефактов для деплоя
+      - uses: actions/download-artifact@v4
         with:
           name: github-pages
 
-      - uses: actions/deploy-pages@v4 # Деплой на GitHub Pages
+      - uses: actions/deploy-pages@v4
+
