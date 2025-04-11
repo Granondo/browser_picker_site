@@ -63,6 +63,74 @@ main {
   opacity: 0.1;
 }
 
+.moon-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.moon-button {
+  position: relative;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.moon-button:hover {
+  transform: scale(1.05);
+}
+
+.moon-button.clicked {
+  transform: scale(0.95);
+}
+
+.moon {
+  width: 100px;
+  height: 100px;
+}
+
+.moon-body {
+  fill: white;
+  transform-origin: 50% 50%;
+  animation: moon-float 3s ease-in-out infinite;
+}
+
+.moon-crater {
+  fill: rgba(255, 255, 255, 0.9);
+  transform-origin: 50% 50%;
+  animation: moon-float 3s ease-in-out infinite;
+}
+
+.moon-counter {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--primary-color);
+  border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes moon-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 .browser-icon {
   position: absolute;
   font-size: 4rem;
