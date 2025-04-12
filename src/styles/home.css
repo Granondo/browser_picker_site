@@ -63,11 +63,25 @@ main {
   opacity: 0.1;
 }
 
-.moon-section {
+.title-container {
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin: 2rem 0;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.title-container h2 {
+  margin: 0;
+}
+
+.moon-section {
+  transform: scale(0.4);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: -20px; /* This will move the moon section slightly up */
 }
 
 .moon-button {
@@ -106,18 +120,18 @@ main {
 
 .moon-counter {
   position: absolute;
-  top: -5px;
-  right: -5px;
+  top: -20px;
+  right: -50px;
   background: rgba(255, 255, 255, 0.9);
   color: var(--primary-color);
   border-radius: 50%;
-  min-width: 20px;
-  height: 20px;
-  font-size: 12px;
+  min-width: 50px;
+  height: 50px;
+  font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 4px;
+  padding: 0 6px;
   font-weight: bold;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -349,3 +363,5 @@ footer {
     gap: 2rem;
   }
 }
+
+

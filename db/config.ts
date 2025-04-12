@@ -1,6 +1,16 @@
-import { defineDb } from 'astro:db';
+import { defineDb, defineTable, column } from 'astro:db';
 
-// https://astro.build/db/config
 export default defineDb({
-  tables: {}
+  tables: {
+    moonClicks: defineTable({
+      columns: {
+        id: column.number({ primaryKey: true, autoIncrement: true }),
+        totalClicks: column.number({ default: 0 }),
+        lastUpdated: column.date({ default: new Date() })
+      }
+    })
+  }
 });
+
+
+

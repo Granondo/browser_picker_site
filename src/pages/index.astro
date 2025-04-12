@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/home.css';  // Import CSS directly
+import { db } from 'astro:db';
 ---
 
 <Layout title="Browsea - Choose Your Browser">
@@ -40,7 +41,20 @@ import '../styles/home.css';  // Import CSS directly
     </div>
 
     <section class="features">
-      <h2>Why Browsea?</h2>
+      <div class="title-container">
+        <h2>Why Browsea?</h2>
+        <div class="moon-section">
+          <button class="moon-button">
+            <svg class="moon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path class="moon-body" d="M12 3C7.03 3 3 7.03 3 12C3 16.97 7.03 21 12 21C16.97 21 21 16.97 21 12C21 11.54 20.96 11.08 20.9 10.64C19.92 12.01 18.32 13 16.5 13C13.47 13 11 10.53 11 7.5C11 5.68 11.99 4.08 13.36 3.1C12.92 3.04 12.46 3 12 3Z"/>
+              <circle class="moon-crater" cx="8" cy="9" r="1.75"/>
+              <circle class="moon-crater" cx="15" cy="15" r="1.25"/>
+              <circle class="moon-crater" cx="10" cy="14" r="1"/>
+            </svg>
+            <span class="moon-counter">0</span>
+          </button>
+        </div>
+      </div>
       <div class="feature-grid">
         <div class="feature">
           <div class="feature-icon">🎯</div>
@@ -62,17 +76,6 @@ import '../styles/home.css';  // Import CSS directly
           <h3>Privacy First</h3>
           <p>No data collection, works completely offline for your privacy</p>
         </div>
-      </div>
-      <div class="moon-section">
-        <button class="moon-button">
-          <svg class="moon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path class="moon-body" d="M12 3C7.03 3 3 7.03 3 12C3 16.97 7.03 21 12 21C16.97 21 21 16.97 21 12C21 11.54 20.96 11.08 20.9 10.64C19.92 12.01 18.32 13 16.5 13C13.47 13 11 10.53 11 7.5C11 5.68 11.99 4.08 13.36 3.1C12.92 3.04 12.46 3 12 3Z"/>
-            <circle class="moon-crater" cx="8" cy="9" r="1.75"/>
-            <circle class="moon-crater" cx="15" cy="15" r="1.25"/>
-            <circle class="moon-crater" cx="10" cy="14" r="1"/>
-          </svg>
-          <span class="moon-counter">0</span>
-        </button>
       </div>
     </section>
 
@@ -107,4 +110,52 @@ import '../styles/home.css';  // Import CSS directly
     </div>
   </footer>
 </Layout>
+
+<script>
+  const moonButton = document.querySelector('.moon-button');
+  const moonCounter = document.querySelector('.moon-counter');
+  
+  if (moonButton && moonCounter) {
+    const hasClicked = localStorage.getItem('moonClicked') === 'true';
+    const initialClicks = parseInt((moonButton as HTMLButtonElement).dataset.initialClicks || '0', 10);
+    
+    // Update counter display
+    moonCounter.textContent = initialClicks.toString();
+    
+    // If user has already clicked, add 'clicked' class
+    if (hasClicked) {
+      moonButton.classList.add('clicked');
+    }
+    
+    moonButton.addEventListener('click', async () => {
+      // Only proceed if user hasn't clicked before
+      if (!hasClicked) {
+        try {
+          const response = await fetch('/api/moon-clicks', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          if (response.ok) {
+            const { clicks } = await response.json();
+            moonCounter.textContent = clicks.toString();
+            moonButton.classList.add('clicked');
+            localStorage.setItem('moonClicked', 'true');
+          }
+        } catch (error) {
+          console.error('Failed to update moon clicks:', error);
+        }
+      }
+      
+      // Add animation class
+      moonButton.classList.add('clicked');
+      setTimeout(() => moonButton.classList.remove('clicked'), 200);
+    });
+  }
+</script>
+
+
+
 
