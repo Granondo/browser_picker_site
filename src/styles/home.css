@@ -75,63 +75,61 @@ main {
   margin: 0;
 }
 
-.moon-section {
-  transform: scale(0.4);
-  margin: 0;
+.heart-section {
   display: flex;
+  justify-content: center;
   align-items: center;
   position: relative;
-  top: -20px; /* This will move the moon section slightly up */
+  top: -20px;
+  margin: 2rem 0;
 }
 
-.moon-button {
+.heart-button {
   position: relative;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   transition: transform 0.2s ease;
+  animation: float 3s ease-in-out infinite;
 }
 
-.moon-button:hover {
-  transform: scale(1.05);
+.heart-button:hover {
+  transform: scale(1.05) translateY(-10px);
 }
 
-.moon-button.clicked {
+.heart-button.clicked {
   transform: scale(0.95);
+  animation: none;
 }
 
-.moon {
-  width: 100px;
-  height: 100px;
+.heart {
+  width: 48px;
+  height: 48px;
+  fill: var(--text-secondary);
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
-.moon-body {
-  fill: white;
-  transform-origin: 50% 50%;
-  animation: moon-float 3s ease-in-out infinite;
+.heart-button:hover .heart {
+  fill: var(--primary-color);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
-.moon-crater {
-  fill: rgba(255, 255, 255, 0.9);
-  transform-origin: 50% 50%;
-  animation: moon-float 3s ease-in-out infinite;
-}
-
-.moon-counter {
+.heart-counter {
   position: absolute;
-  top: -20px;
-  right: -50px;
+  top: -5px;
+  right: -5px;
   background: rgba(255, 255, 255, 0.9);
   color: var(--primary-color);
   border-radius: 50%;
-  min-width: 50px;
-  height: 50px;
-  font-size: 24px;
+  min-width: 20px;
+  height: 20px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 6px;
+  padding: 0 4px;
   font-weight: bold;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
