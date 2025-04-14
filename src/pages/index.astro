@@ -1,10 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/home.css';
-// import { db, moonClicks } from 'astro:db';
+import { db, heartClicks } from 'astro:db';
 
 // Get initial clicks count
-// const clickRecord = await db.select().from(moonClicks).limit(1);
+const clickRecord = await db.select().from(heartClicks).limit(1);
 // const initialClicks = clickRecord.length > 0 ? clickRecord[0].totalClicks : 0;
 ---
 
@@ -52,7 +52,7 @@ import '../styles/home.css';
             <svg class="heart" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
-            <span class="heart-counter">0</span>
+            <span class="heart-counter">{clickRecord[0].totalClicks}</span>
           </button>
         </div>
         </div>
@@ -71,7 +71,7 @@ import '../styles/home.css';
         <div class="feature">
           <div class="feature-icon">🪄</div>
           <h3>Easy Setup</h3>
-          <p>Simple installation process with no complex configuration needed</p>
+          <p>Simple installation: you don't need to install anything additional.</p>
         </div>
         <div class="feature">
           <div class="feature-icon">🔒</div>
@@ -82,22 +82,22 @@ import '../styles/home.css';
     </section>
 
     <section class="how-it-works">
-      <h2>How It Works</h2>
+      <h2>How Install It</h2>
       <div class="steps">
         <div class="step">
           <div class="step-number">1</div>
-          <h3>Click a Link</h3>
-          <p>Click any link in any application</p>
+          <h3>Download and Extract</h3>
+          <p>Download the zip archive and extract it wherever you want.</p>
         </div>
         <div class="step">
           <div class="step-number">2</div>
-          <h3>Choose Browser</h3>
-          <p>Select your preferred browser from the popup</p>
+          <h3>Install</h3>
+          <p>Install it by right-clicking on the install file and selecting "Run as administrator."</p>
         </div>
         <div class="step">
           <div class="step-number">3</div>
-          <h3>Browse Away</h3>
-          <p>The link opens in your chosen browser</p>
+          <h3>Make It Default</h3>
+          <p>In settings, choose Browsea as your default browser.</p>
         </div>
       </div>
     </section>
@@ -114,48 +114,48 @@ import '../styles/home.css';
 </Layout>
 
 <script>
-  const moonButton = document.querySelector('.moon-button');
-  const moonCounter = document.querySelector('.moon-counter');
+  // const heartButton = document.querySelector('.moon-button');
+  // const moonCounter = document.querySelector('.moon-counter');
   
-  if (moonButton && moonCounter) {
-    const hasClicked = localStorage.getItem('moonClicked') === 'true';
-    const initialClicks = parseInt((moonButton as HTMLButtonElement).dataset.initialClicks || '0', 10);
+  // if (heartButton && moonCounter) {
+  //   const hasClicked = localStorage.getItem('moonClicked') === 'true';
+  //   const initialClicks = parseInt((heartButton as HTMLButtonElement).dataset.initialClicks || '0', 10);
     
-    // Update counter display
-    moonCounter.textContent = initialClicks.toString();
+  //   // Update counter display
+  //   moonCounter.textContent = initialClicks.toString();
     
-    // If user has already clicked, add 'clicked' class
-    if (hasClicked) {
-      moonButton.classList.add('clicked');
-    }
+  //   // If user has already clicked, add 'clicked' class
+  //   if (hasClicked) {
+  //     heartButton.classList.add('clicked');
+  //   }
     
-    moonButton.addEventListener('click', async () => {
-      // Only proceed if user hasn't clicked before
-      if (!hasClicked) {
-        try {
-          const response = await fetch('/api/moon-clicks', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          });
+  //   heartButton.addEventListener('click', async () => {
+  //     // Only proceed if user hasn't clicked before
+  //     if (!hasClicked) {
+  //       try {
+  //         const response = await fetch('/api/moon-clicks', {
+  //           method: 'POST',
+  //           headers: {
+  //             'Content-Type': 'application/json'
+  //           }
+  //         });
           
-          if (response.ok) {
-            const { clicks } = await response.json();
-            moonCounter.textContent = clicks.toString();
-            moonButton.classList.add('clicked');
-            localStorage.setItem('moonClicked', 'true');
-          }
-        } catch (error) {
-          console.error('Failed to update moon clicks:', error);
-        }
-      }
+  //         if (response.ok) {
+  //           const { clicks } = await response.json();
+  //           moonCounter.textContent = clicks.toString();
+  //           heartButton.classList.add('clicked');
+  //           localStorage.setItem('moonClicked', 'true');
+  //         }
+  //       } catch (error) {
+  //         console.error('Failed to update moon clicks:', error);
+  //       }
+  //     }
       
-      // Add animation class
-      moonButton.classList.add('clicked');
-      setTimeout(() => moonButton.classList.remove('clicked'), 200);
-    });
-  }
+  //     // Add animation class
+  //     heartButton.classList.add('clicked');
+  //     setTimeout(() => heartButton.classList.remove('clicked'), 200);
+  //   });
+  // }
 </script>
 
 

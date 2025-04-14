@@ -1,8 +1,8 @@
-import { db, moonClicks } from 'astro:db';
+import { db, heartClicks } from 'astro:db';
 
 export default async function seed() {
-  await db.insert(moonClicks).values({
-    totalClicks: 0,
+  await db.insert(heartClicks).values({
+    totalClicks: 1000000,
     lastUpdated: new Date()
   });
 }
