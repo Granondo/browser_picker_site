@@ -114,49 +114,54 @@ const clickRecord = await db.select().from(heartClicks).limit(1);
 </Layout>
 
 <script>
-  // const heartButton = document.querySelector('.moon-button');
-  // const moonCounter = document.querySelector('.moon-counter');
+  const heartButton = document.querySelector('.heart-button');
+  const heartCounter = document.querySelector('.heart-counter');
   
-  // if (heartButton && moonCounter) {
-  //   const hasClicked = localStorage.getItem('moonClicked') === 'true';
-  //   const initialClicks = parseInt((heartButton as HTMLButtonElement).dataset.initialClicks || '0', 10);
+  if (heartButton && heartCounter) {
+    // Check localStorage immediately
+    let hasClicked = localStorage.getItem('heartClicked') === 'true';
     
-  //   // Update counter display
-  //   moonCounter.textContent = initialClicks.toString();
+    // If user has already clicked, add 'clicked' class
+    if (hasClicked) {
+      heartButton.classList.add('clicked');
+    }
     
-  //   // If user has already clicked, add 'clicked' class
-  //   if (hasClicked) {
-  //     heartButton.classList.add('clicked');
-  //   }
-    
-  //   heartButton.addEventListener('click', async () => {
-  //     // Only proceed if user hasn't clicked before
-  //     if (!hasClicked) {
-  //       try {
-  //         const response = await fetch('/api/moon-clicks', {
-  //           method: 'POST',
-  //           headers: {
-  //             'Content-Type': 'application/json'
-  //           }
-  //         });
-          
-  //         if (response.ok) {
-  //           const { clicks } = await response.json();
-  //           moonCounter.textContent = clicks.toString();
-  //           heartButton.classList.add('clicked');
-  //           localStorage.setItem('moonClicked', 'true');
-  //         }
-  //       } catch (error) {
-  //         console.error('Failed to update moon clicks:', error);
-  //       }
-  //     }
+    heartButton.addEventListener('click', async () => {
+      // Recheck hasClicked status before proceeding
+      hasClicked = localStorage.getItem('heartClicked') === 'true';
       
-  //     // Add animation class
-  //     heartButton.classList.add('clicked');
-  //     setTimeout(() => heartButton.classList.remove('clicked'), 200);
-  //   });
-  // }
+      // Only proceed if user hasn't clicked before
+      if (!hasClicked) {
+        try {
+          const response = await fetch('/api/heart-clicks', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          if (response.ok) {
+            const { clicks } = await response.json();
+            heartCounter.textContent = clicks.toString();
+            
+            // Set localStorage first
+            localStorage.setItem('heartClicked', 'true');
+            hasClicked = true;
+            heartButton.classList.add('clicked');
+          }
+        } catch (error) {
+          console.error('Failed to update heart clicks:', error);
+        }
+      }
+      
+      // Animation regardless of click status
+      heartButton.classList.add('animate');
+      setTimeout(() => heartButton.classList.remove('animate'), 200);
+    });
+  }
 </script>
+
+
 
 
 

@@ -105,13 +105,26 @@ main {
   animation: float 3s ease-in-out infinite;
 }
 
-.heart-button:hover {
-  transform: scale(1.05) translateY(-10px);
+.heart-button.clicked {
+  animation: pulse 2s ease-in-out infinite;
+  cursor: default;
 }
 
-.heart-button.clicked {
-  transform: scale(0.95);
+@keyframes pulse {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.10);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+.heart-button.animate {
   animation: none;
+  transform: scale(0.95);
 }
 
 .heart {
@@ -122,9 +135,13 @@ main {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
-.heart-button:hover .heart {
+.heart-button.clicked .heart {
   fill: var(--primary-color);
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.heart-button:hover:not(.clicked) {
+  transform: scale(1.05) translateY(-10px);
 }
 
  .heart-counter {
@@ -352,5 +369,6 @@ footer {
     gap: 2rem;
   }
 }
+
 
 
