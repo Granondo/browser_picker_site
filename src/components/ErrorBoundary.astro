@@ -1,0 +1,28 @@
+---
+interface Props {
+  fallback?: string;
+}
+
+const { fallback = "Something went wrong. Please try again later." } = Astro.props;
+---
+
+<div class="error-boundary">
+  <slot>
+    <p class="error-message">{fallback}</p>
+  </div>
+</div>
+
+<style>
+  .error-boundary {
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid var(--error-color, #ff4444);
+    border-radius: 4px;
+    background-color: var(--error-bg, #fff5f5);
+  }
+
+  .error-message {
+    color: var(--error-text, #cc0000);
+    margin: 0;
+  }
+</style>

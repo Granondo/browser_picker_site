@@ -6,6 +6,7 @@
   --bg-color: #fafbff;
   --text-color: #1a1a1a;
   --text-secondary: #666;
+  --heart-fill: #b4b2b2;
   --card-bg: white;
   --section-bg: #f8f9ff;
   --shadow-color: rgba(0, 0, 0, 0.05);
@@ -20,6 +21,7 @@ html[data-theme="dark"] {
   --bg-color: #111827;
   --text-color: #f3f4f6;
   --text-secondary: #9ca3af;
+  --heart-fill:#9ca3af;
   --card-bg: #1f2937;
   --section-bg: #151e2d;
   --shadow-color: rgba(0, 0, 0, 0.2);

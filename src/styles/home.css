@@ -102,11 +102,11 @@ main {
   padding: 0;
   cursor: pointer;
   transition: transform 0.2s ease;
-  animation: float 3s ease-in-out infinite;
+  animation: pulse 2s ease-in-out infinite;
 }
 
 .heart-button.clicked {
-  animation: pulse 2s ease-in-out infinite;
+  animation: float 3s ease-in-out infinite;
   cursor: default;
 }
 
@@ -130,7 +130,7 @@ main {
 .heart {
   width: 48px;
   height: 48px;
-  fill: var(--text-secondary);
+  fill: var(--heart-fill);
   transition: all 0.3s ease;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
@@ -151,15 +151,6 @@ main {
   color: var(--primary-color);
   font-size: 12px;
   font-weight: bold;
-}
-
-@keyframes moon-float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
 }
 
 h1 {

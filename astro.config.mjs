@@ -4,9 +4,12 @@ import db from '@astrojs/db';
 
 export default defineConfig({
   site: 'https://granondo.github.io',
-
-  // Note the underscore, not hyphen
   base: '/browser_picker_site',
-
-  integrations: [db()]
+  integrations: [
+    db({
+      runtime: process.env.NODE_ENV === 'production',
+      cache: true,
+      seed: process.env.NODE_ENV !== 'production'
+    })
+  ]
 })

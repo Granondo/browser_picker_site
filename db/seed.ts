@@ -1,10 +1,17 @@
-import { db, heartClicks } from 'astro:db';
+import { db, heartclicks } from 'astro:db';
 
 export default async function seed() {
-  await db.insert(heartClicks).values({
-    totalClicks: 1000000,
-    lastUpdated: new Date()
-  });
+  try {
+    await db.insert(heartclicks).values({
+      totalClicks: 1000000,
+      lastUpdated: new Date()
+    });
+    console.log('Seed data inserted successfully');
+  } catch (error) {
+    console.error('Failed to seed database:', error);
+    throw error;
+  }
 }
+
 
 

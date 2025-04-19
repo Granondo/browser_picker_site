@@ -1,11 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/home.css';
-import { db, heartClicks } from 'astro:db';
+import { db, heartclicks } from 'astro:db';
 
-// Get initial clicks count
-const clickRecord = await db.select().from(heartClicks).limit(1);
-// const initialClicks = clickRecord.length > 0 ? clickRecord[0].totalClicks : 0;
+const clickRecord = await db.select().from(heartclicks).limit(1);
+const initialClicks = clickRecord.length > 0 ? clickRecord[0].totalClicks : 0;
 ---
 
 <Layout title="Browsea - Choose Your Browser">
@@ -52,7 +51,7 @@ const clickRecord = await db.select().from(heartClicks).limit(1);
             <svg class="heart" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
-            <span class="heart-counter">{clickRecord[0].totalClicks}</span>
+            <span class="heart-counter">{initialClicks}</span>
           </button>
         </div>
         </div>
@@ -118,48 +117,50 @@ const clickRecord = await db.select().from(heartClicks).limit(1);
   const heartCounter = document.querySelector('.heart-counter');
   
   if (heartButton && heartCounter) {
-    // Check localStorage immediately
     let hasClicked = localStorage.getItem('heartClicked') === 'true';
-    
-    // If user has already clicked, add 'clicked' class
     if (hasClicked) {
       heartButton.classList.add('clicked');
     }
     
     heartButton.addEventListener('click', async () => {
-      // Recheck hasClicked status before proceeding
       hasClicked = localStorage.getItem('heartClicked') === 'true';
       
-      // Only proceed if user hasn't clicked before
       if (!hasClicked) {
         try {
+          // Get CSRF token from cookie
+          const csrfToken = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('csrf-token='))
+            ?.split('=')[1];
+
           const response = await fetch('/api/heart-clicks', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': csrfToken || ''
             }
           });
           
           if (response.ok) {
             const { clicks } = await response.json();
             heartCounter.textContent = clicks.toString();
-            
-            // Set localStorage first
             localStorage.setItem('heartClicked', 'true');
             hasClicked = true;
             heartButton.classList.add('clicked');
+          } else if (response.status === 429) {
+            console.warn('Rate limit exceeded. Please try again later.');
           }
         } catch (error) {
           console.error('Failed to update heart clicks:', error);
         }
       }
       
-      // Animation regardless of click status
       heartButton.classList.add('animate');
       setTimeout(() => heartButton.classList.remove('animate'), 200);
     });
   }
 </script>
+
 
 
 
