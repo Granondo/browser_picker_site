@@ -72,7 +72,7 @@ main {
 .browser-icon:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
 .browser-icon:nth-child(2) { top: 60%; left: 70%; animation-delay: 1s; }
 .browser-icon:nth-child(3) { top: 30%; right: 20%; animation-delay: 2s; }
-.browser-icon:nth-child(4) { bottom: 20%; right: 40%; animation-delay: 3s; }
+.browser-icon:nth-child(4) { bottom: 20%; left: 10%; animation-delay: 3s; }
 
 h1 {
   font-size: 3.5rem;
@@ -192,13 +192,13 @@ h1 {
   line-height: 1.6;
 }
 
-.how-it-works {
+.how-install-it {
   background: var(--section-bg);
   padding: 6rem 2rem;
   text-align: center;
 }
 
-.how-it-works h2 {
+.how-install-it h2 {
   font-size: 2.5rem;
   color: var(--text-color);
   margin-bottom: 3rem;
@@ -273,7 +273,7 @@ footer {
     font-size: 2.5rem;
   }
 
-  .features, .how-it-works {
+  .features, .how-install-it {
     padding: 4rem 1rem;
   }
 
